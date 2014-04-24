@@ -6,6 +6,7 @@ import sys
 import os
 import json
 import pandas as pd
+from read import dataset_dir, read_csv
 
 
 required_files = ["METADATA.json", "X.csv", "y.csv"]
@@ -30,8 +31,10 @@ def validate_column(x):
         raise ValueError("Categorical variables need at least three levels")
 
 
-def validate_dataset(directory):
+def validate_dataset(dataset):
     """Checks a dataset for validity"""
+
+    directory = dataset_dir(dataset)
 
     # Only certain files are allowed
     allowed_files = required_files + optional_files
@@ -46,11 +49,11 @@ def validate_dataset(directory):
             raise ValueError("Missing required file \"%s\"" % required_file)
 
     # METADATA.json must have required elements
-    metadata = json.load(open(directory + "METADATA.json"))
+    metadata = json.load(open(os.path.join(directory, "METADATA.json")))
     pass
 
     # Check the columns of X for adherence to the spec
-    X = pd.read_csv(directory + "X.csv", encoding="utf-8")
+    X = read_csv(os.path.join(directory, "X.csv"))
     for column in X.columns:
         try:
             validate_column(X[column])
@@ -74,7 +77,7 @@ def validate_dataset(directory):
                          % (missing, metadata["missing"]))
 
     # Check y for the proper shape
-    Y = pd.read_csv(directory + "y.csv", encoding="utf-8")
+    Y = read_csv(os.path.join(directory, "y.csv"))
     if Y.shape[1] != 1:
         raise ValueError("y.csv must be a single column")
     if Y.shape[0] != metadata_shape[0]:
