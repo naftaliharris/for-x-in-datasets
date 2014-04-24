@@ -18,6 +18,7 @@ def test_datasets():
             print e.message
         else:
             sys.stdout.write(".")
+            sys.stdout.flush()
     print ""
 
 
