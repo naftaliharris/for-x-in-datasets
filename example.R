@@ -22,7 +22,7 @@ for(ds in list.files("datasets")) {
     md <- fromJSON(file=file.path("datasets", ds, "METADATA.json"))
     if (use_dataset(md)) {
         X <- read.csv(file.path("datasets", ds, "X.csv"))
-        y <- read.csv(file.path("datasets", ds, "y.csv"))
+        y <- read.csv(file.path("datasets", ds, "y.csv"))[,1]
 
         # Do some statistics or ML with X and y
     }
