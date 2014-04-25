@@ -10,7 +10,7 @@ from read import dataset_dir, read_csv
 
 
 required_files = ["METADATA.json", "X.csv", "y.csv"]
-optional_files = ["X0.csv", "DESCRIPTION.txt"]
+optional_files = ["X0.csv", "rownames.csv", "DESCRIPTION.txt"]
 
 
 def datatype(x):
