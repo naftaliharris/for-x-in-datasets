@@ -1,6 +1,6 @@
 {
     "y_type": "binary",
-    "X_type": "numeric",
+    "X_type": "binary",
     "X_missing": false,
     "rows": 351,
     "cols": 34

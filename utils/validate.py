@@ -12,23 +12,22 @@ from read import dataset_dir, read_csv
 required_files = ["METADATA.json", "X.csv", "y.csv"]
 optional_files = ["X0.csv", "rownames.csv", "DESCRIPTION.txt"]
 
+complexity = {
+    "numeric": 0,
+    "binary": 1,
+    "categorical": 2,
+    "text": 3
+}
+
 
 def datatype(x):
-    """Determines the sort of data that x is"""
+    """Guesses the sort of data that x is"""
     if x.dtype == object:
         return "categorical"
-    elif set(x.value_counts().index) == set([0, 1]):
-        return "binary"
-    else:
-        return "numeric"
-
-
-def validate_column(x):
-    """Checks a pandas series for validity"""
-    
-    # Categorical variables must have at least three levels
-    if datatype(x) == "categorical" and len(x.value_counts()) < 3:
-        raise ValueError("Categorical variables need at least three levels")
+    for y in x:
+        if y != 0 and y != 1:
+            return "numeric"  # return fast for numeric data
+    return "binary"
 
 
 def validate_dataset(dataset):
@@ -48,19 +47,20 @@ def validate_dataset(dataset):
         if required_file not in file_names:
             raise ValueError("Missing required file \"%s\"" % required_file)
 
-    # METADATA.json must have required elements
+    # METADATA.json must have certain required elements
     metadata = json.load(open(os.path.join(directory, "METADATA.json")))
     pass
 
-    # Check the columns of X for adherence to the spec
+    # Check the columns of X for correctness of X_type
     X = read_csv(os.path.join(directory, "X.csv"))
+    X_type = "numeric"
     for column in X.columns:
-        try:
-            validate_column(X[column])
-        except Exception as e:
-            raise type(e),\
-                  type(e)("Column \"%s\": " % column + e.message),\
-                  sys.exc_info()[2]
+        dt = datatype(X[column])
+        if complexity[dt] > complexity[X_type]:
+            X_type = dt
+    if complexity[X_type] > complexity[metadata["X_type"]]:
+        raise ValueError("METADATA X_type (%s) doesn't agree with empirical "
+                         "X_type (%s)" % (metadata["X_type"], X_type))
 
     # No lying about the dimensions of X
     metadata_shape = (metadata["rows"], metadata["cols"])
@@ -87,7 +87,9 @@ def validate_dataset(dataset):
     y = Y.iloc[:,0]
 
     # Check y for validity
-    validate_column(y)
+    dt = datatype(y)
+    if dt == "categorical" and len(y.value_counts()) < 3:
+        raise ValueError("y is categorical but has less than three values")
     if pd.isnull(y).any():
         raise ValueError("No missing data allowed in y.csv")
     if datatype(y) != metadata["y_type"]:
