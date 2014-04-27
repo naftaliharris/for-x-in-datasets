@@ -18,7 +18,7 @@ def test_datasets():
             validate_dataset(ds)
         except Exception as e:
             print "\nDataset \"%s\":" % ds
-            print e.message
+            raise
         else:
             sys.stdout.write(".")
             sys.stdout.flush()

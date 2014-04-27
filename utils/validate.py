@@ -63,7 +63,7 @@ def validate_dataset(dataset):
                   sys.exc_info()[2]
 
     # No lying about the dimensions of X
-    metadata_shape = (metadata["instances"], metadata["variables"])
+    metadata_shape = (metadata["rows"], metadata["cols"])
     if X.shape != metadata_shape:
         raise ValueError("Dimensions of X.csv %s don't agree with the "
                          "dimensions in METADATA.json %s"
@@ -71,7 +71,7 @@ def validate_dataset(dataset):
 
     # No lying about missingness in X
     missing = pd.isnull(X).any().any()
-    if missing != metadata["missing"]:
+    if missing != metadata["X_missing"]:
         raise ValueError("Empirical missingness of X.csv (%s) doesn't agree "
                          "with the value in METADATA.json (%s)"
                          % (missing, metadata["missing"]))
@@ -81,8 +81,8 @@ def validate_dataset(dataset):
     if Y.shape[1] != 1:
         raise ValueError("y.csv must be a single column")
     if Y.shape[0] != metadata_shape[0]:
-        raise ValueError("y.csv has %d instances, "
-                         "but METADATA.json claims %d instances"
+        raise ValueError("y.csv has %d rows, "
+                         "but METADATA.json claims %d rows"
                          % (Y.shape[0], metadata_shape[0]))
     y = Y.iloc[:,0]
 
@@ -90,7 +90,7 @@ def validate_dataset(dataset):
     validate_column(y)
     if pd.isnull(y).any():
         raise ValueError("No missing data allowed in y.csv")
-    if datatype(y) != metadata["response"]:
+    if datatype(y) != metadata["y_type"]:
         raise ValueError("METADATA.json response type (\"%s\") "
                          "isn't the observed response type (\"%s\") in y.csv"
-                         % (metadata["response"], datatype(y)))
+                         % (metadata["y_type"], datatype(y)))

@@ -5,15 +5,16 @@ library(rjson)  # you'll need to use install.package("rjson") if you don't have 
 use_dataset <- function(md) {
     # Determine whether or not to use the dataset in your work
 
-    n <- md$instances
-    p <- md$variables
-    response <- md$response
-    missing <- md$missing
+    n <- md$rows
+    p <- md$cols
+    y_type <- md$y_type
+    X_type <- md$X_type
+    X_missing <- md$X_missing
 
     # Example rules:
-    #return(response == "binary" && n > 1000)
-    #return(response == "numeric" && p < n)
-    #return(response %in% c("binary", "categorical") && !missing)
+    #return(y_type == "binary" && n > 1000)
+    #return(y_type == "numeric" && p < n)
+    #return(y_type %in% c("binary", "categorical") && !X_missing)
 
     return(TRUE)
 }

@@ -1,6 +1,7 @@
 {
-    "response": "binary",
-    "instances": 45211,
-    "variables": 16,
-    "missing": false
+    "y_type": "binary",
+    "X_type": "categorical",
+    "X_missing": false,
+    "rows": 45211,
+    "cols": 16
 }

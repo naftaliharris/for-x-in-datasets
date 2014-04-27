@@ -1,6 +1,7 @@
 {
-    "response": "numeric",
-    "instances": 263,
-    "variables": 21,
-    "missing": false
+    "y_type": "numeric",
+    "X_type": "categorical",
+    "X_missing": false,
+    "rows": 263,
+    "cols": 21
 }

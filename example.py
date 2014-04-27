@@ -6,15 +6,16 @@ from utils.read import all_datasets, get_metadata, get_X, get_y
 def use_dataset(md):
     """Determine whether to use the dataset in your work"""
 
-    n = md["instances"]
-    p = md["variables"]
-    response = md["response"]
-    missing = md["missing"]
+    n = md["rows"]
+    p = md["cols"]
+    y_type = md["y_type"]
+    X_type = md["X_type"]
+    X_missing = md["X_missing"]
 
     # Example rules:
-    #return response == "binary" and n > 1000
-    #return response == "numeric" and p < n
-    #return response in ["binary", "categorical"] and not missing
+    #return y_type == "binary" and n > 1000
+    #return y_type == "numeric" and p < n
+    #return y_type in ["binary", "categorical"] and not X_missing
 
     return True
 
