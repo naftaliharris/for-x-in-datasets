@@ -10,7 +10,8 @@ from read import dataset_dir, read_csv
 
 
 required_files = ["METADATA.json", "X.csv", "y.csv"]
-optional_files = ["X0.csv", "rownames.csv", "DESCRIPTION.txt"]
+optional_files = ["X0.csv", "X_rownames.csv", "X0_rownames.csv",
+                  "DESCRIPTION.txt"]
 
 complexity = {
     "numeric": 0,
