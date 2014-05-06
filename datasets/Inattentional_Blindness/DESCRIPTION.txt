@@ -1,0 +1,21 @@
+From http://ww2.coastal.edu/kingw/statistics/R-tutorials/logistic.html
+
+During the Fall semester of 2005, two students in our program--Rachel Mullet and
+Lauren Garafola--did a senior research project in which they studied a
+phenomenon called Inattentional Blindness (IB). IB refers to situations in which
+a person fails to see an obvious stimulus right in front of his eyes. (For
+details see this website.) In their study, Rachel and Lauren had subjects view
+an online video showing college students passing basketballs to each other, and
+the task was to count the number of times students in white shirts passed the
+basketball. During the video, a person in a black gorilla suit walked though the
+picture in a very obvious way. At the end of the video, subjects were asked if
+they saw the gorilla. Most did not!
+
+Rachel and Lauren hypothesized that IB could be predicted from performance on
+the Stroop Color Word test. This test produces three scores: "W" (word alone,
+i.e., a score derived from reading a list of color words such as red, green,
+black), "C" (color alone, in which a score is derived from naming the color in
+which a series of Xs are printed), and "CW" (the Stroop task, in which a score
+is derived from the subject's attempt to name the color in which a color word is
+printed when the word and the color do not agree). The data are in the following
+table, in which the response, "seen", is coded as 0=no and 1=yes.
