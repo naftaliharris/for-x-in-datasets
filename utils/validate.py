@@ -3,12 +3,13 @@ Tests...
 """
 
 import sys
+import re
 import os
 import json
 import pandas as pd
 from read import dataset_dir, read_csv
 
-
+dataset_pattern = r"^[A-Z0-9][a-zA-Z0-9]+(_[A-Z0-9][a-zA-Z0-9]+)*$"
 required_files = ["METADATA.json", "X.csv", "y.csv"]
 optional_files = ["X0.csv", "X_rownames.csv", "X0_rownames.csv",
                   "DESCRIPTION.txt"]
@@ -33,6 +34,10 @@ def datatype(x):
 
 def validate_dataset(dataset):
     """Checks a dataset for validity"""
+
+    # Check the name
+    if not re.match(dataset_pattern, dataset):
+        raise ValueError("Invalid dataset name")
 
     directory = dataset_dir(dataset)
 
@@ -85,7 +90,7 @@ def validate_dataset(dataset):
         raise ValueError("y.csv has %d rows, "
                          "but METADATA.json claims %d rows"
                          % (Y.shape[0], metadata_shape[0]))
-    y = Y.iloc[:,0]
+    y = Y.iloc[:, 0]
 
     # Check y for validity
     dt = datatype(y)

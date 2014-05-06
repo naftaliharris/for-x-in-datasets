@@ -22,17 +22,68 @@ we will specify formats for. There are three kinds of datasets we will consider:
     unlabeled x's, with the idea that these unlabeled x's may help in the
     prediction.
 
+Each x is generally a vector with several or many components, called
+"variables", some of which might be missing. Each of the x's consists of the
+same variables. Each y consists of just a single variable.
 
-## The Dataset Directory
+The variables that make up x are also known in different communities as 
+"features", "covariates", or "independent variables".
+
+
+## Variable Attributes
+
+Now let's talk about what possible variables there are. At the most general
+level, a variable is just a possible set of values. Different procedures treat
+variables differently depending on the attributes of these sets. In this
+section, we enumerate some of common attributes:
+
+Linear, ordinal, circular, unordered.
+
+
+## Variable Types
+
+We must represent variables in our data somehow. We do this as follows:
+
+* **Linear**: Must be represented as an unquoted number, in either decimal or
+  scientific notation. (If the number is an integer, it needn't have a decimal
+point). Large numbers should not include thousands-place commas. Examples of
+valid representations of linear variables are '15', '-0.2', '1234' and
+'3.1e-10', and '3.1E-10', (all without the single quotes). Examples of invalid
+representations are '"15"', '1,234', and '3.1x10^-10', (again without the single
+quotes).
+* **Ordinal**: Must be represented as an unquoted integer, with the smallest
+  value being '1' and each larger value increasing by one. Examples of valid
+representations of ordinal variables are '1', '2', and '3'. Examples of invalid
+representations are '"Bad"', '"Fair"', and '"Good"'.
+* **Circular**: These are represented the same as ordinal variables.
+* **Unordered**: These are represented as double-quoted strings. The strings
+  should not themselves contain double quotes or newlines. Examples of valid
+representations are '"Africa"', '"North America"', and '"Asia"'. Examples of
+invalid representations are 'Africa', and '"Dwayne "The Rock" Johnson"'.
+
+Specifying the dataset format also requires describing the types of variables
+that may be present.
+
+3) Data types, (in decreasing order of "simplicity"):
+    i) Numeric
+    ii) Binary
+    iii) Ordinal
+    iv) Circular-ordinal
+    v) Categorical
+    vi) Text
+    vii) Circular numeric???
+
+
+## Dataset Names and Directories
 
 Each dataset must be located in a single directory. The name of the dataset also
 serves as the directory name. Dataset names should consist of capitalized words
-separated by underscores rather than spaces, and more generally use no
-characters that require escaping in a bash shell. Examples of valid dataset
-names are: "Baseball\_Hitters", "Habermans\_Survival", and "Titanic".
+separated by underscores rather than spaces, use just ASCII letters and digits.
+Examples of valid dataset names are: "Baseball\_Hitters", "Habermans\_Survival",
+and "Titanic".
 
 Inside each dataset directory there must be a METADATA.json file, described
-below. There may also be files X.csv, y.csv, X0.csv, 
+below.
 
 
 ## METADATA.json Specification
@@ -58,26 +109,13 @@ There are several optional files that may be associated with a dataset:
 * rownames.csv: ...
 
 
-## Definition of Data Types
-
-3) Data types, (in decreasing order of "simplicity"):
-    i) Numeric
-    ii) Binary
-    iii) Ordinal
-    iv) Circular-ordinal
-    v) Categorical
-    vi) Text
-    vii) Circular numeric???
-
-
 ## CSV Specification
 
-* Numeric, integral, and binary values are represented with numeric strings,
-  (scientific notation ok).
-* Categorical variables with at least three levels are represented as "quoted
-  strings".
-* Missing data is represented by no text, not NA, NaN, ?, or anything else.
 * UTF-8 format only.
+* Missing data is represented by no text, not NA, NaN, ?, or anything else.
+* Each CSV must have a header containing the names of each of the columns. If
+  the columns don't have fundamental names, name them "V1", "V2", "V3"...
+
 
 ## Open issues:
 
@@ -85,7 +123,6 @@ There are several optional files that may be associated with a dataset:
 * Compressing large datasets
 * Multiple response problems
 * Canonical train/test splits
-* Does each csv need a header?
 * Including text fields
 * Including ordinal or circular fields
 * Row names: rownames.csv.
