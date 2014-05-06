@@ -53,5 +53,5 @@ If this project appeals to you, you can help out in many ways!
     textual data...
 4.  Improve the tools that test datasets for adherence to the specification.
 5.  Build tools to help format datasets to adhere to the specification.
-6.  Build tools to selectively download datasets so that you don't need to clone
+6.  Write tools to selectively download datasets so that you don't need to clone
     this whole repo just to work with a subset of its datasets.
