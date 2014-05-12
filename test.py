@@ -27,7 +27,7 @@ def test_datasets():
 
 def test_examples():
     # Python
-    print "Testing python example..."
+    print "Testing Python example..."
     import example
     example.main()
 
@@ -35,6 +35,11 @@ def test_examples():
     print "Testing R example..."
     if subprocess.call(["R", "--slave"], stdin=open("example.R")) != 0:
         raise RuntimeError("R script failed!")
+
+    # Julia
+    print "Testing Julia example..."
+    if subprocess.call(["julia", "example.jl"]) != 0:
+        raise RuntimeError("Julia script failed!")
 
 
 def main():
