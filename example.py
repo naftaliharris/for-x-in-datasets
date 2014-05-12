@@ -16,7 +16,7 @@ for ds in os.listdir("datasets"):
     #if y_type in ["binary", "categorical"] and not X_missing:
     if True:
         X = pd.read_csv(os.path.join("datasets", ds, "X.csv"))
-        y = pd.read_csv(os.path.join("datasets", ds, "y.csv")).iloc[:,0]
+        y = pd.read_csv(os.path.join("datasets", ds, "y.csv")).iloc[:, 0]
 
         # Do some stats or ML with X and y here:
         pass
