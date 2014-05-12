@@ -2,7 +2,7 @@
 
 This document contains the specification for dataset formatting in this project.
 It's still a work in progress, unfortunately... the "real spec" right now is
-whatever is in the test script now, unfortunately.
+whatever is in the test script now...
 
 
 ## Categorizations of Datasets
@@ -23,8 +23,9 @@ we will specify formats for. There are three kinds of datasets we will consider:
     prediction.
 
 Each x is generally a vector with several or many components, called
-"variables", some of which might be missing. Each of the x's consists of the
-same variables. Each y consists of just a single variable.
+"variables", some of which might be missing. Examples of variables would be
+things like "height", "city", or "income". Each of the x's consists of the same
+variables, and are commonly  Each y consists of just a single variable.
 
 The variables that make up x are also known in different communities as 
 "features", "covariates", or "independent variables".
@@ -36,6 +37,8 @@ Now let's talk about what possible variables there are. At the most general
 level, a variable is just a possible set of values. Different procedures treat
 variables differently depending on the attributes of these sets. In this
 section, we enumerate some of common attributes:
+
+**Unordered**: These are
 
 Linear, ordinal, circular, unordered.
 
@@ -88,12 +91,17 @@ below.
 
 ## METADATA.json Specification
 
-The METADATA.json file
-    i) n
-    ii) p
-    iii) X type
-    iv) y type
-    v) missingness of X
+The METADATA.json file contains information about the particular dataset. Just
+by reading it, one should be able to decide whether the dataset would be useful
+to work with. The file is a single JSON object, with the following key value
+pairs:
+
+* "y\_type": the data type for the y vector
+* "X\_type": the hardest data type for the x vector  (NOTE: should be an array)
+* "X\_missing": a boolean value indicating whether any X has any missing values
+* "rows": the number of rows (observations) in X
+* "cols": the number of columns (variables) in X and y.
+
     vi) inclusion of DESCRIPTION, rownames, unsupervized data...
     viii) possible compression used
     ix) possible data format used
@@ -120,9 +128,8 @@ There are several optional files that may be associated with a dataset:
 ## Open issues:
 
 * Encoding sparse matrices
-* Compressing large datasets
-* Multiple response problems
-* Canonical train/test splits
+* Compressing large datasets... compress all datasets?
+* Dealing with multiple response problems
+* Canonical train/test splits: solve with splits\_X.csv? Kind of a pain.
 * Including text fields
 * Including ordinal or circular fields
-* Row names: rownames.csv.

@@ -7,13 +7,12 @@ import sys
 import os
 import subprocess
 from utils.validate import validate_dataset
-from utils.read import all_datasets
 
 
 def test_datasets():
     sys.stdout.write("Testing datasets")
     sys.stdout.flush()
-    for ds in all_datasets():
+    for ds in os.listdir("datasets"):
         try:
             validate_dataset(ds)
         except Exception as e:

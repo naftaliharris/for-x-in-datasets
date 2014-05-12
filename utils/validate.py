@@ -7,7 +7,6 @@ import re
 import os
 import json
 import pandas as pd
-from read import dataset_dir, read_csv
 
 dataset_pattern = r"^[A-Z0-9][a-zA-Z0-9]+(_[A-Z0-9][a-zA-Z0-9]+)*$"
 required_files = ["METADATA.json", "X.csv", "y.csv"]
@@ -20,6 +19,16 @@ complexity = {
     "categorical": 2,
     "text": 3
 }
+
+
+def read_csv(path):
+    return pd.read_csv(path, encoding="utf-8")
+
+
+def dataset_dir(dataset):
+    DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                            "../datasets"))
+    return os.path.abspath(os.path.join(DATA_DIR, dataset))
 
 
 def datatype(x):
