@@ -28,8 +28,8 @@ def test_datasets():
 def test_examples():
     # Python
     print "Testing Python example..."
-    import example
-    example.main()
+    if subprocess.call(["python", "example.py"]) != 0:
+        raise RuntimeError("Python script failed!")
 
     # R
     print "Testing R example..."
