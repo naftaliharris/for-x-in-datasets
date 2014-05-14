@@ -1,6 +1,6 @@
 {
     "y_type": "numeric",
-    "X_type": "categorical",
+    "X_types": ["numeric", "binary", "categorical"],
     "X_missing": false,
     "rows": 263,
     "cols": 21

@@ -7,7 +7,7 @@ for (ds in list.files("datasets")) {
     n <- md$rows
     p <- md$cols
     y_type <- md$y_type
-    X_type <- md$X_type
+    X_types <- md$X_types
     X_missing <- md$X_missing
 
     # Determine whether to use the dataset. Example rules:

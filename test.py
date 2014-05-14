@@ -66,16 +66,19 @@ def validate_dataset(dataset):
     metadata = json.load(open(os.path.join(directory, "METADATA.json")))
     pass
 
-    # Check the columns of X for correctness of X_type
+    # Check the columns of X for correctness of X_types
     X = read_csv(os.path.join(directory, "X.csv"))
-    X_type = "numeric"
+    
+    if len(set(metadata["X_types"])) != len(metadata["X_types"]):
+        raise ValueError("METADATA X_types (%s) contains duplicates" % 
+                         metadata["X_types"])
+
+    X_types = set()
     for column in X.columns:
-        dt = datatype(X[column])
-        if complexity[dt] > complexity[X_type]:
-            X_type = dt
-    if complexity[X_type] > complexity[metadata["X_type"]]:
-        raise ValueError("METADATA X_type (%s) doesn't agree with empirical "
-                         "X_type (%s)" % (metadata["X_type"], X_type))
+        X_types.add(datatype(X[column]))
+    if X_types != set(metadata["X_types"]):
+        raise ValueError("METADATA X_types (%s) doesn't agree with empirical "
+                         "X_types (%s)" % (set(metadata["X_types"]), X_types))
 
     # No lying about the dimensions of X
     metadata_shape = (metadata["rows"], metadata["cols"])

@@ -8,7 +8,7 @@ for ds in readdir("datasets")
     md = JSON.parse(readall(md_file))
 
     n, p = md["rows"], md["cols"]
-    y_type, X_type, X_missing = md["y_type"], md["X_type"], md["X_missing"]
+    y_type, X_types, X_missing = md["y_type"], md["X_types"], md["X_missing"]
 
     # Determine whether to use the dataset. Example rules:
     #if y_type == "binary" && n > 1000
