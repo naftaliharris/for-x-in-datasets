@@ -1,7 +1,26 @@
 {
-    "y_type": "binary",
-    "X_types": ["numeric"],
-    "X_missing": false,
-    "rows": 4601,
-    "cols": 57
+    "X": {
+        "types": [
+            "numeric"
+        ],
+        "rows": 4601,
+        "cols": 57,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/SpamBase/X.csv"
+    },
+    "y": {
+        "type": "binary",
+        "rows": 4601,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/SpamBase/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/SpamBase/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/SpamBase/DESCRIPTION.txt"
+    }
 }

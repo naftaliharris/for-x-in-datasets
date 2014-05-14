@@ -97,7 +97,7 @@ to work with. The file is a single JSON object, with the following key value
 pairs:
 
 * "y\_type": the data type for the y vector
-* "X\_type": the hardest data type for the x vector  (NOTE: should be an array)
+* "X\_types": an array of the unique types that variables in X have
 * "X\_missing": a boolean value indicating whether any X has any missing values
 * "rows": the number of rows (observations) in X
 * "cols": the number of columns (variables) in X and y.

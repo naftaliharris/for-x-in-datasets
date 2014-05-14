@@ -7,8 +7,9 @@ import pandas as pd  # if necessary, install this with $ easy_install pandas
 
 for ds in os.listdir("datasets"):
     md = json.load(open(os.path.join("datasets", ds, "METADATA.json")))
-    n, p = md["rows"], md["cols"]
-    y_type, X_types, X_missing = md["y_type"], md["X_types"], md["X_missing"]
+    n, p = md["X"]["rows"], md["X"]["cols"]
+    y_type, X_types = md["y"]["type"], md["X"]["types"]
+    X_missing = md["X"]["missing"]
 
     # Determine whether to use the dataset. Example rules:
     #if y_type == "binary" and n > 1000:

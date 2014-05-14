@@ -1,7 +1,26 @@
 {
-    "y_type": "binary",
-    "X_types": ["numeric"],
-    "X_missing": false,
-    "rows": 49,
-    "cols": 3
+    "X": {
+        "types": [
+            "numeric"
+        ],
+        "rows": 49,
+        "cols": 3,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Inattentional_Blindness/X.csv"
+    },
+    "y": {
+        "type": "binary",
+        "rows": 49,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Inattentional_Blindness/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Inattentional_Blindness/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Inattentional_Blindness/DESCRIPTION.txt"
+    }
 }

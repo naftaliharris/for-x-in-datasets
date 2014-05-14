@@ -1,7 +1,28 @@
 {
-    "y_type": "numeric",
-    "X_types": ["numeric", "binary", "categorical"],
-    "X_missing": false,
-    "rows": 263,
-    "cols": 21
+    "X": {
+        "types": [
+            "numeric",
+            "binary",
+            "categorical"
+        ],
+        "rows": 263,
+        "cols": 21,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Hitters/X.csv"
+    },
+    "y": {
+        "type": "numeric",
+        "rows": 263,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Hitters/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Hitters/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Hitters/DESCRIPTION.txt"
+    }
 }

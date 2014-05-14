@@ -7,8 +7,9 @@ for ds in readdir("datasets")
     md_file = joinpath("datasets", ds, "METADATA.json")
     md = JSON.parse(readall(md_file))
 
-    n, p = md["rows"], md["cols"]
-    y_type, X_types, X_missing = md["y_type"], md["X_types"], md["X_missing"]
+    n, p = md["X"]["rows"], md["X"]["cols"]
+    y_type, X_types = md["y"]["type"], md["X"]["types"]
+    X_missing = md["X"]["missing"]
 
     # Determine whether to use the dataset. Example rules:
     #if y_type == "binary" && n > 1000

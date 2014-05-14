@@ -1,7 +1,27 @@
 {
-    "y_type": "binary",
-    "X_types": ["numeric", "binary"],
-    "X_missing": false,
-    "rows": 351,
-    "cols": 34
+    "X": {
+        "types": [
+            "numeric",
+            "binary"
+        ],
+        "rows": 351,
+        "cols": 34,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Ionosphere/X.csv"
+    },
+    "y": {
+        "type": "binary",
+        "rows": 351,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Ionosphere/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Ionosphere/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Ionosphere/DESCRIPTION.txt"
+    }
 }

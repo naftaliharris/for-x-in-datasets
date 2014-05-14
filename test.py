@@ -11,16 +11,8 @@ import subprocess
 import pandas as pd
 
 dataset_pattern = r"^[A-Z0-9][a-zA-Z0-9]+(_[A-Z0-9][a-zA-Z0-9]+)*$"
-required_files = ["METADATA.json", "X.csv", "y.csv"]
-optional_files = ["X0.csv", "X_rownames.csv", "X0_rownames.csv",
-                  "DESCRIPTION.txt"]
-
-complexity = {
-    "numeric": 0,
-    "binary": 1,
-    "categorical": 2,
-    "text": 3
-}
+required_files = ["METADATA.json", "X.csv", "y.csv", "DESCRIPTION.txt"]
+optional_files = ["X0.csv", "X_rownames.csv", "X0_rownames.csv"]
 
 
 def read_csv(path):
@@ -68,20 +60,20 @@ def validate_dataset(dataset):
 
     # Check the columns of X for correctness of X_types
     X = read_csv(os.path.join(directory, "X.csv"))
-    
-    if len(set(metadata["X_types"])) != len(metadata["X_types"]):
-        raise ValueError("METADATA X_types (%s) contains duplicates" % 
-                         metadata["X_types"])
+
+    if len(set(metadata["X"]["types"])) != len(metadata["X"]["types"]):
+        raise ValueError("METADATA X_types (%s) contains duplicates" %
+                         metadata["X"]["types"])
 
     X_types = set()
     for column in X.columns:
         X_types.add(datatype(X[column]))
-    if X_types != set(metadata["X_types"]):
-        raise ValueError("METADATA X_types (%s) doesn't agree with empirical "
-                         "X_types (%s)" % (set(metadata["X_types"]), X_types))
+    if X_types != set(metadata["X"]["types"]):
+        raise ValueError("METADATA X_types %s doesn't agree with empirical "
+                         "X_types %s" % (set(metadata["X"]["types"]), X_types))
 
     # No lying about the dimensions of X
-    metadata_shape = (metadata["rows"], metadata["cols"])
+    metadata_shape = (metadata["X"]["rows"], metadata["X"]["cols"])
     if X.shape != metadata_shape:
         raise ValueError("Dimensions of X.csv %s don't agree with the "
                          "dimensions in METADATA.json %s"
@@ -89,19 +81,19 @@ def validate_dataset(dataset):
 
     # No lying about missingness in X
     missing = pd.isnull(X).any().any()
-    if missing != metadata["X_missing"]:
+    if missing != metadata["X"]["missing"]:
         raise ValueError("Empirical missingness of X.csv (%s) doesn't agree "
                          "with the value in METADATA.json (%s)"
-                         % (missing, metadata["missing"]))
+                         % (missing, metadata["X"]["missing"]))
 
     # Check y for the proper shape
     Y = read_csv(os.path.join(directory, "y.csv"))
     if Y.shape[1] != 1:
         raise ValueError("y.csv must be a single column")
-    if Y.shape[0] != metadata_shape[0]:
+    if Y.shape[0] != metadata["y"]["rows"]:
         raise ValueError("y.csv has %d rows, "
                          "but METADATA.json claims %d rows"
-                         % (Y.shape[0], metadata_shape[0]))
+                         % (Y.shape[0], metadata["y"]["rows"]))
     y = Y.iloc[:, 0]
 
     # Check y for validity
@@ -110,10 +102,10 @@ def validate_dataset(dataset):
         raise ValueError("y is categorical but has less than three values")
     if pd.isnull(y).any():
         raise ValueError("No missing data allowed in y.csv")
-    if datatype(y) != metadata["y_type"]:
+    if datatype(y) != metadata["y"]["type"]:
         raise ValueError("METADATA.json response type (\"%s\") "
                          "isn't the observed response type (\"%s\") in y.csv"
-                         % (metadata["y_type"], datatype(y)))
+                         % (metadata["y"]["type"], datatype(y)))
 
 
 def test_datasets():

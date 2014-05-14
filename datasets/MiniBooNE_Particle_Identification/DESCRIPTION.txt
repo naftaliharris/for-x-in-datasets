@@ -1,0 +1,30 @@
+From: http://archive.ics.uci.edu/ml/datasets/MiniBooNE+particle+identification
+
+Abstract: This dataset is taken from the MiniBooNE experiment and is used to
+distinguish electron neutrinos (signal) from muon neutrinos (background).
+
+Source:
+
+Byron Roe (byronroe '@' umich.edu) 
+Department of Physics University of Michigan 
+Ann Arbor, MI 48109
+
+
+Data Set Information:
+
+The submitted file is set up as follows. In the first line is the the number of
+signal events followed by the number of background events. The signal events
+come first, followed by the background events. Each line, after the first line
+has the 50 particle ID variables for one event.
+
+
+Attribute Information:
+
+50 particle ID variables (real) for each event.
+
+
+Relevant Papers:
+
+B. Roe et al., 'Boosted Decision Trees, an Alternative to Artificial Neural
+Networks' <[Web Link]>, 
+arXiv:physics/0408124, Nucl. Instrum. Meth. A543, 577 (2005).

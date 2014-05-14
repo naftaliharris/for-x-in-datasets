@@ -1,7 +1,28 @@
 {
-    "y_type": "numeric",
-    "X_types": ["numeric", "binary", "categorical"],
-    "X_missing": false,
-    "rows": 176,
-    "cols": 17
+    "X": {
+        "types": [
+            "numeric",
+            "binary",
+            "categorical"
+        ],
+        "rows": 176,
+        "cols": 17,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Pitchers/X.csv"
+    },
+    "y": {
+        "type": "numeric",
+        "rows": 176,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Pitchers/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Pitchers/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Baseball_Pitchers/DESCRIPTION.txt"
+    }
 }

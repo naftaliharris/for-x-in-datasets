@@ -1,7 +1,27 @@
 {
-    "y_type": "binary",
-    "X_types": ["numeric", "binary"],
-    "X_missing": false,
-    "rows": 1055,
-    "cols": 41
+    "X": {
+        "types": [
+            "numeric",
+            "binary"
+        ],
+        "rows": 1055,
+        "cols": 41,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/QSAR_Biodegradation/X.csv"
+    },
+    "y": {
+        "type": "binary",
+        "rows": 1055,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/QSAR_Biodegradation/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/QSAR_Biodegradation/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/QSAR_Biodegradation/DESCRIPTION.txt"
+    }
 }

@@ -1,7 +1,28 @@
 {
-    "y_type": "binary",
-    "X_types": ["numeric", "binary", "categorical"],
-    "X_missing": false,
-    "rows": 2584,
-    "cols": 18
+    "X": {
+        "types": [
+            "numeric",
+            "binary",
+            "categorical"
+        ],
+        "rows": 2584,
+        "cols": 18,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Seismic_Bumps/X.csv"
+    },
+    "y": {
+        "type": "binary",
+        "rows": 2584,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Seismic_Bumps/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Seismic_Bumps/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Seismic_Bumps/DESCRIPTION.txt"
+    }
 }

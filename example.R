@@ -4,11 +4,11 @@ library(rjson)  # you'll need to use install.package("rjson") if you don't have 
 
 for (ds in list.files("datasets")) {
     md <- fromJSON(file=file.path("datasets", ds, "METADATA.json"))
-    n <- md$rows
-    p <- md$cols
-    y_type <- md$y_type
-    X_types <- md$X_types
-    X_missing <- md$X_missing
+    n <- md$X$rows
+    p <- md$X$cols
+    y_type <- md$y$type
+    X_types <- md$X$types
+    X_missing <- md$X$missing
 
     # Determine whether to use the dataset. Example rules:
     #if (y_type == "binary" && n > 1000) {
