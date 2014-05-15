@@ -123,27 +123,35 @@ def test_datasets():
     print ""
 
 
+def test_example(proglang, script, tester):
+    sys.stdout.write("Testing %s example... " % proglang)
+    sys.stdout.flush()
+    try:
+        res = tester()
+    except OSError:
+        print "no %s on this machine; didn't test %s" % (proglang, script)
+    else:
+        print "success!" if res == 0 else "failure!"
+
+
 def test_examples():
-    # Python
-    print "Testing Python example..."
-    if subprocess.call(["python", "example.py"]) != 0:
-        raise RuntimeError("Python script failed!")
+    py_test = lambda: subprocess.call(["python", "example.py"])
+    test_example("Python", "example.py", py_test)
 
-    # R
-    print "Testing R example..."
-    if subprocess.call(["R", "--slave"], stdin=open("example.R")) != 0:
-        raise RuntimeError("R script failed!")
-
-    # Julia
-    print "Testing Julia example..."
-    if subprocess.call(["julia", "example.jl"]) != 0:
-        raise RuntimeError("Julia script failed!")
+    R_test = lambda: subprocess.call(["R", "--slave"], stdin=open("example.R"))
+    test_example("R", "example.R", R_test)
+  
+    jl_test = lambda: subprocess.call(["julia", "example.jl"])
+    test_example("Julia", "example.jl", jl_test)
+       
+    m_test = lambda: subprocess.call(["matlab"])
+    test_example("Matlab", "example.m", m_test)
 
 
 def main():
     test_datasets()
     test_examples()
-    print "Success!"
+    print "Done!"
 
 
 if __name__ == "__main__":

@@ -27,10 +27,10 @@ variables are supposed to be the predictors and which are the response, among
 many others.
 
 This project attempts to solve all three of these problems by collecting a
-number of datasets, gathering metadata about them, and, critically, formatting
-them consistently according to the explicit specifications in SPECIFICATIONS.md.
-By doing so, trying out your method on a number of datasets is hardly more
-challenging than a basic for-loop.
+number of datasets, including from the sources above, gathering metadata about
+them, and, critically, formatting them consistently according to the explicit
+specifications in SPECIFICATIONS.md.  By doing so, trying out your method on a
+number of datasets is hardly more challenging than a basic for-loop.
 
 
 ## Working with these datasets
@@ -47,7 +47,7 @@ If this project appeals to you, you can help out in many ways!
 1.  Contribute one of your datasets: help advance the state of statistics and
     machine learning and see what people can do with your dataset!
 2.  Write an example script for working with these datasets in your favorite
-    language: Matlab, Julia, C++, Java...
+    language: Matlab, C++, Java...
 3.  Help work out issues in the specification related to time-series data,
     spatial data, large datasets, unsupervized and semi-supervized learning,
     textual data...
