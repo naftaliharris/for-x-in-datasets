@@ -1,0 +1,27 @@
+{
+    "X": {
+        "types": [
+            "numeric",
+            "binary"
+        ],
+        "rows": 6497,
+        "cols": 12,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Wine_Quality/X.csv"
+    },
+    "y": {
+        "type": "numeric",
+        "rows": 6497,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Wine_Quality/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Wine_Quality/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Wine_Quality/DESCRIPTION.txt"
+    }
+}
