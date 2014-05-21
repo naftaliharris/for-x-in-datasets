@@ -1,0 +1,26 @@
+{
+    "X": {
+        "types": [
+            "numeric"
+        ],
+        "rows": 1503,
+        "cols": 5,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Airfoil_Self_Noise/X.csv"
+    },
+    "y": {
+        "type": "numeric",
+        "rows": 1503,
+        "cols": 1,
+        "missing": false,
+        "format": "csv",
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Airfoil_Self_Noise/y.csv"
+    },
+    "METADATA": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Airfoil_Self_Noise/METADATA.json"
+    },
+    "DESCRIPTION": {
+        "url": "https://github.com/naftaliharris/for-x-in-datasets/raw/master/datasets/Airfoil_Self_Noise/DESCRIPTION.txt"
+    }
+}
