@@ -13,8 +13,8 @@ dataset_pattern = r"^[A-Z0-9][a-zA-Z0-9]+(_[A-Z0-9][a-zA-Z0-9]+)*$"
 required_files = ["METADATA.tsv", "DATA.tsv", "DESCRIPTION.txt"]
 optional_files = []
 
-METADATA_COLS = ["name", "n", "p", "numeric X?", "binary X?", "categorical X?",
-                 "y type", "Missing?"]
+METADATA_COLS = ["name", "n", "p", "numeric_X", "binary_X", "categorical_X",
+                 "y_type", "missing_X"]
 
 
 def read_tsv(path):
@@ -82,7 +82,7 @@ def validate_dataset(dataset):
         X_types.add(datatype(X[column]))
     metadata_types = set()
     for data_type in ["numeric", "binary", "categorical"]:
-        if metadata["%s X?" % data_type][0]:
+        if metadata["%s_X" % data_type][0]:
             metadata_types.add(data_type)
     if X_types != metadata_types:
         raise ValueError("METADATA data types %s don't agree with empirical "
@@ -90,10 +90,10 @@ def validate_dataset(dataset):
 
     # No lying about missingness in X
     missing = pd.isnull(X).any().any()
-    if missing != metadata["Missing?"][0]:
+    if missing != metadata["missing_X"][0]:
         raise ValueError("Empirical missingness of X.csv (%s) doesn't agree "
                          "with the value in METADATA.tsv (%s)"
-                         % (missing, metadata["Missing?"][0]))
+                         % (missing, metadata["missing_X"][0]))
 
     # Check y for validity
     dt = datatype(y)
@@ -101,10 +101,10 @@ def validate_dataset(dataset):
         raise ValueError("y is categorical but has less than three values")
     if pd.isnull(y).any():
         raise ValueError("No missing values allowed in y")
-    if datatype(y) != metadata["y type"][0]:
+    if datatype(y) != metadata["y_type"][0]:
         raise ValueError("METADATA.tsv response type (\"%s\") "
                          "isn't the observed response type (\"%s\") in y"
-                         % (metadata["y type"][0], datatype(y)))
+                         % (metadata["y_type"][0], datatype(y)))
 
 
 def test_datasets():

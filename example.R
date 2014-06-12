@@ -4,11 +4,11 @@ for (ds in list.files("datasets")) {
     md <- read.delim(file.path("datasets", ds, "METADATA.tsv"))
     n <- md$n[0]
     p <- md$p[0]
-    y_type <- md$y.type[0]
-    X_numeric = md$numeric.X.[0]
-    X_binary = md$binary.X.[0]
-    X_categorical = md$categorical.X.[0]
-    X_missing <- md$Missing.
+    y_type <- md$y_type[0]
+    X_numeric = md$numeric_X[0]
+    X_binary = md$binary_X[0]
+    X_categorical = md$categorical_X[0]
+    X_missing <- md$missing_X[0]
 
     # Determine whether to use the dataset. Example rules:
     #if (y_type == "binary" && n > 1000) {

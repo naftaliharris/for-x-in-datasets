@@ -1,2 +1,2 @@
-"name"	"n"	"p"	"numeric X?"	"binary X?"	"categorical X?"	"y type"	"Missing?"
+"name"	"n"	"p"	"numeric_X"	"binary_X"	"categorical_X"	"y_type"	"missing_X"
 "Banknote_Authentication"	1372	4	1	0	0	"binary"	0

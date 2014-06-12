@@ -12,7 +12,7 @@ for ds in readdir("datasets")
     X_numeric = md[:numeric_X][1]
     X_binary = md[:binary_X][1]
     X_categorical = md[:categorical_X][1]
-    X_missing = md[:Missing][1]
+    X_missing = md[:missing_X][1]
 
     # Determine whether to use the dataset. Example rules:
     #if y_type == "binary" && n > 1000

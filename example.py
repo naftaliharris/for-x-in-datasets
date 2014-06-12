@@ -7,11 +7,11 @@ import pandas as pd  # if necessary, install this with $ easy_install pandas
 for ds in os.listdir("datasets"):
     md = pd.read_csv(os.path.join("datasets", ds, "METADATA.tsv"), sep="\t")
     n, p = md["n"][0], md["p"][0]
-    y_type = md["y type"][0]
-    X_numeric = md["numeric X?"][0]
-    X_binary = md["binary X?"][0]
-    X_categorical = md["categorical X?"][0]
-    X_missing = md["Missing?"][0]
+    y_type = md["y_type"][0]
+    X_numeric = md["numeric_X"][0]
+    X_binary = md["binary_X"][0]
+    X_categorical = md["categorical_X"][0]
+    X_missing = md["missing_X"][0]
 
     # Determine whether to use the dataset. Example rules:
     #if y_type == "binary" and n > 1000:
