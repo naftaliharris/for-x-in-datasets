@@ -1,14 +1,67 @@
 # Data Format Specification
 
 This document contains the specification for dataset formatting in this project.
-It's still a work in progress, unfortunately... the "real spec" right now is
-whatever is in the test script now...
+The primary underlying goal for this specification is simplicity. I want this
+specification to be easy to understand, and the resulting datasets to be easy to
+work with and easy to format to this specification.
 
 
-## Categorizations of Datasets
+## The dataset directory
 
-Specifying a format for datasets requires describing the kinds of datasets that
-we will specify formats for. There are three kinds of datasets we will consider:
+Each dataset consists of three files in a directory: The dataset itself, called
+**DATA.tsv**, some short metadata about the dataset, called **METADATA.tsv**,
+and a textual description of the dataset and perhaps the variables in it, called
+**DESCRIPTION.txt**.
+
+The name of the dataset also serves as the directory name. Dataset names should
+consist of capitalized words separated by underscores rather than spaces, using
+just ASCII letters and digits.  Examples of valid dataset names are:
+"Baseball\_Hitters", "Habermans\_Survival", and "Titanic".
+
+
+## DATA.tsv
+
+**DATA.tsv** contains the dataset's actual data, in a tabular format described
+in the later **TSV Format** section. The first column of **DATA.tsv** is the
+response variable, (sometimes known as "y" or the dependent variable). The
+remaining columns of **DATA.tsv** are the feature variables, (sometimes known as
+"X", independent variables, covariates, or the design matrix). In each dataset,
+the goal is to predict or understand the response variable using the feature
+variables.
+
+There are two differences between the way we treat the response variable and the
+feature variables. Firstly, the response variable is not allowed to have missing
+data, while the feature variables are allowed to. Secondly, if the response
+variable is binary, it must use 0/1 formatting rather than "categorical string"
+encoding, (both described in the **TSV Format** section). It is preferred, but
+not required, that binary feature variables use 0/1 formatting.
+
+
+## METADATA.tsv
+
+**METADATA.tsv** is a very short file describing the dataset's data. In fact, it
+is a tabular tsv file, (described in **TSV Format**), with just a header and a
+single row. The columns of this file are:
+
+1.  "name": The name of the dataset, (equivalently the directory name).
+2.  "n": An integral value indicating the number of observations (rows excluding
+    the header) in the dataset.
+3.  "p": An integral value indicating the number of feature variables,
+    (equivalently the number of columns of the design matrix, or the number
+columns in DATA.tsv minus one).
+4.  "numeric\_X": A binary value indicating whether at least one of the feature
+    variables is "strictly numeric", ie, numeric but not binary.
+5.  "binary\_X": A binary value indicating whether at least one of the feature
+    variables is binary.
+6.  "categorical\_X": A binary value indicating whether at least one of the
+    feature variables is categorical.
+7.  "y\_type": A categorical variable indicating the type of the response
+    variable, one of "numeric", "binary", or "categorical".
+8.  "missing\_X": A binary variable indicating whether the feature variables
+    contain any missing values.
+
+
+## What kinds of datasets are we considering?
 
 1.  **Supervized datasets**: These are (x, y) pairs, where the goal is to
     predict y from x or more generally learn about the relationship between y
@@ -77,18 +130,6 @@ that may be present.
     vii) Circular numeric???
 
 
-## Dataset Names and Directories
-
-Each dataset must be located in a single directory. The name of the dataset also
-serves as the directory name. Dataset names should consist of capitalized words
-separated by underscores rather than spaces, use just ASCII letters and digits.
-Examples of valid dataset names are: "Baseball\_Hitters", "Habermans\_Survival",
-and "Titanic".
-
-Inside each dataset directory there must be a METADATA.json file, described
-below.
-
-
 ## METADATA.json Specification
 
 The METADATA.json file contains information about the particular dataset. Just
@@ -109,17 +150,9 @@ pairs:
     xi) perhaps short description, domain, etc
 
 
-## Optional Files
+## TSV Specification
 
-There are several optional files that may be associated with a dataset:
-
-* DESCRIPTION.txt: A textual description of the dataset, (in any format).
-* rownames.csv: ...
-
-
-## CSV Specification
-
-* UTF-8 format only.
+* ASCII encoding only.
 * Missing data is represented by no text, not NA, NaN, ?, or anything else.
 * Each CSV must have a header containing the names of each of the columns. If
   the columns don't have fundamental names, name them "V1", "V2", "V3"...
