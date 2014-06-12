@@ -8,36 +8,33 @@ and perhaps one or two real example datasets. But wouldn't it be nice if you
 could evaluate your method on ten, fifty or even a hundred real datasets instead
 of just one or two?
 
-In practice, doing so is quite challenging, for three reasons. First of all, you
-need to find a large number of datasets. Second of all, you need to figure out
-which of those datasets your method is applicable to. And thirdly, you need to
-format those datasets consistently so that you can apply your method to them.
-
-There are several online dataset collections, like the [UCI Machine Learning
+In practice, doing so is quite challenging. This is due primarily to the fact
+that datasets are not formatted consistently. It's not at all hard to find lots of
+datasets--there are a number of online collections, like the [UCI Machine Learning
 Repository](http://archive.ics.uci.edu/ml/), [mldata.org](http://mldata.org/),
-and [kdnuggets.com](http://www.kdnuggets.com/datasets/index.html), which solve
-the first problem and (to varying degrees) the second. But all of them painfully
-fail to solve the consistent formatting problem. Datasets file formats vary
-between csv, tsv, MS Excel, Rdata, fixed-column width, SVMLight, MS Word
-(seriously), and etchings in stone tablets. Even if you convert all of them to a
-particular file format, you're still left with inconsistencies about how to
-represent binary values, (0/1, -1/+1, g/b, 1/2, "foo"/"bar"), how to represent
-missing data, ("NA", "N/A", "NaN", "Missing", 0, -1, "", "?"), and which
-variables are supposed to be the predictors and which are the response, among
-many others.
+and [kdnuggets.com](http://www.kdnuggets.com/datasets/index.html)--but all of
+these collections have datasets that are formatted painfully inconsistently.
 
-This project attempts to solve all three of these problems by collecting a
-number of datasets, including from the sources above, gathering metadata about
-them, and, critically, formatting them consistently according to the explicit
-specifications in SPECIFICATIONS.md.  By doing so, trying out your method on a
+Datasets file formats vary between csv, tsv, MS Excel, Rdata, fixed-column
+width, SVMLight, MS Word (seriously), and etchings in stone tablets. Even if you
+convert all of them to a particular file format, you're still left with
+inconsistencies about how to represent binary values, (0/1, -1/+1, g/b, 1/2,
+"foo"/"bar"), how to represent missing data, ("NA", "N/A", "NaN", "Missing", 0,
+-1, "", "?"), and which variables are supposed to be the predictors and which
+are the response, among many others.
+
+This project attempts to solve this problem by collecting a number of datasets,
+including from the sources above, gathering metadata about them, and,
+critically, formatting them consistently according to the explicit
+specifications in SPECIFICATIONS.md. By doing so, trying out your method on a
 number of datasets is hardly more challenging than a basic for-loop.
 
 
 ## Working with these datasets
 
-You can find a very short example of how to work with these datasets in Python
-or R in the corresonding example.\* script. Just clone or download this repo,
-copy the script, and you're good to go!
+You can find a very short example of how to work with these datasets in Python,
+R, Matlab, or Julia in the corresonding example.\* script. Just clone or
+download this repo, copy the script, and you're good to go!
 
 
 ## Contributing
