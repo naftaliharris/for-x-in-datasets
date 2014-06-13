@@ -2,16 +2,15 @@
 
 This document contains the specification for dataset formatting in this project.
 The primary underlying goal for this specification is simplicity. I want this
-specification to be easy to understand, and the resulting datasets to be easy to
-work with and easy to format to this specification.
+specification to be easy to understand. I want it to be easy to format datasets
+this specification. And I want the resulting datasets to be easy to work with.
 
 
 ## The dataset directory
 
 Each dataset consists of three files in a directory: The data itself, called
 **DATA.tsv**, some short metadata about the dataset, called **METADATA.tsv**,
-and a textual description of the dataset and perhaps the variables in it, called
-**DESCRIPTION.txt**.
+and a textual description of the dataset, called **DESCRIPTION.txt**.
 
 The name of the dataset also serves as the directory name. Dataset names should
 consist of capitalized words separated by underscores rather than spaces, using
@@ -36,10 +35,12 @@ variable is binary, it must use 0/1 formatting rather than "categorical string"
 encoding, (both described in the **TSV Format** section). It is preferred, but
 not required, that binary feature variables use 0/1 formatting.
 
-Sometimes the rows of a dataset have names. For example, each row (observation)
+Sometimes the rows of a dataset have names. For example, each observation (row)
 might refer to a particular chemical, and the rowname might be the name of this
 chemical. Do not include rownames in DATA.tsv, as they should not be used in
-building models and consequently complicate doing so.
+building models and consequently complicate doing so. Similarly, do not include
+a column of train/test split ids. The general rule is that DATA.tsv should
+contain only the response variable and the feature variables, nothing more.
 
 
 ## METADATA.tsv
@@ -52,8 +53,8 @@ single row. The columns of this file are:
 2.  "n": An integral value indicating the number of observations (rows excluding
     the header) in the dataset.
 3.  "p": An integral value indicating the number of feature variables,
-    (equivalently the number of columns of the design matrix, or the number
-columns in DATA.tsv minus one).
+    (equivalently the number of columns of the design matrix, or the number of
+    columns in DATA.tsv minus one).
 4.  "numeric\_X": A binary value indicating whether at least one of the feature
     variables is "strictly numeric", ie, numeric but not binary.
 5.  "binary\_X": A binary value indicating whether at least one of the feature
@@ -103,7 +104,9 @@ Categorical variables are represented as double-quoted strings. The strings
 should not themselves contain double quotes, tabs, or newlines. Examples of
 valid representations of categorical variables are '"Africa"', '"North
 America"', and '"Asia"'. Examples of invalid representations are 'Africa', and
-'"Dwayne "The Rock" Johnson"'.
+'"Dwayne "The Rock" Johnson"'. Don't include categorical variables with more
+than a few dozen levels. In particular, don't include any free-form text that
+you would need to further featurize.
 
 All of the fields of a column (variable) should be of the same type. The one
 exception to this is that fields in feature variables can be missing. Missing
@@ -111,11 +114,10 @@ entries should be represented by an empty field, not 'NA', 'NaN', '?', '""', or
 anything else.
 
 Each TSV must have a header containing the names of each of the columns. If the
-columns don't have fundamental names, name them "V1", "V2", "V3", etc, (short
-for "Variable 1", "Variable 2", ...).
+columns don't have names, name them "V1", "V2", "V3", etc.
 
-For example, a DATA.tsv file representing an email spam dataset, that contains a
-few missing fields, might look like this:
+For example, a DATA.tsv file representing an email spam dataset might look like
+this:
 
 ```
 "Is Spam"<TAB>Score<TAB>"Email Provider"<TAB>"Has Dollar Sign"
@@ -126,6 +128,10 @@ few missing fields, might look like this:
 1<TAB>49.1<TAB>"yahoo"<TAB>
 ```
 
+"Is Spam" is the response variable, which we are trying to predict from the
+"Score", "Email Provider", and "Has Dollar Sign" variables. "Is Spam" and "Has
+Dollar Sign" are binary variables, "Score" is a numeric variable, and "Email
+Provider" is a categorical variable.
 
 ## Issues
 
