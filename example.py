@@ -1,7 +1,7 @@
 """A python example of how to work with these datasets."""
 
 import os
-import pandas as pd  # if necessary, install this with $ easy_install pandas
+import pandas as pd  # if necessary, install this with $ pip install pandas
 
 
 for ds in os.listdir("datasets"):
