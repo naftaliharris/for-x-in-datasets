@@ -1,9 +1,11 @@
 # Dataset Formatting Specification
 
 This document contains the specification for dataset formatting in this project.
-The primary underlying goal for this specification is simplicity. I want this
-specification to be easy to understand. I want it to be easy to format datasets
-this specification. And I want the resulting datasets to be easy to work with.
+The underlying goal for this specification is simplicity:
+
+1. This specification to be easy to understand.
+2. It to be easy to format datasets to obey this specification.
+3. Datasets formatted according to this specification should be easy to work with.
 
 
 ## The dataset directory
@@ -15,7 +17,9 @@ and a textual description of the dataset, called **DESCRIPTION.txt**.
 The name of the dataset also serves as the directory name. Dataset names should
 consist of capitalized words separated by underscores rather than spaces, using
 just ASCII letters and digits.  Examples of valid dataset names are:
-"Baseball\_Hitters", "Habermans\_Survival", and "Titanic".
+"Baseball\_Hitters", "Habermans\_Survival", and "Titanic". The reason for these
+limitations on naming is that spaces and unusual characters in file names
+often pose difficulties for scripts.
 
 
 ## DATA.tsv
@@ -72,8 +76,8 @@ single row. The columns of this file are:
 DESCRIPTION.txt is an ASCII text description of the dataset, often copied from
 the original source of the data. The general idea is that you should be able to
 get some extra information about the dataset if you need to by reading this
-file. Unlike DATA.tsv and METADATA.tsv, however, there are no hard requirements
-about what to put in here, however.
+file. Unlike DATA.tsv and METADATA.tsv, however, there are no requirements about
+what to put in here, however.
 
 
 ## TSV Specification
@@ -97,24 +101,24 @@ quotes). Examples of invalid representations are '"15"', '1,234', and
 Binary variables are those that have only two values. Preferably they should be
 represented as either '0' or '1', (without the single quotes). This is a
 requirement if the response variable is binary. However, binary feature
-variables may be represented as double-quoted strings, for example, '"good"' and
-'"bad"', (no single quotes).
+variables may be represented as double-quoted strings, for example, '"pitcher"'
+and '"nonpitcher"', (no single quotes).
 
 Categorical variables are represented as double-quoted strings. The strings
-should not themselves contain double quotes, tabs, or newlines. Examples of
-valid representations of categorical variables are '"Africa"', '"North
-America"', and '"Asia"'. Examples of invalid representations are 'Africa', and
-'"Dwayne "The Rock" Johnson"'. Don't include categorical variables with more
-than a few dozen levels. In particular, don't include any free-form text that
-you would need to further featurize.
+should not themselves contain single or double quotes, tabs, or newlines.
+Examples of valid representations of categorical variables are '"Africa"',
+'"North America"', and '"Asia"'. Examples of invalid representations are
+'Africa', and '"Dwayne "The Rock" Johnson"'. Don't include categorical variables
+with more than a few dozen levels. In particular, don't include any free-form
+text that you would need to further featurize.
 
 All of the fields of a column (variable) should be of the same type. The one
 exception to this is that fields in feature variables can be missing. Missing
-entries should be represented by an empty field, not 'NA', 'NaN', '?', '""', or
-anything else.
+entries should be represented by an empty field '', not 'NA', 'NaN', '?', '""',
+or anything else.
 
 Each TSV must have a header containing the names of each of the columns. If the
-columns don't have names, name them "V1", "V2", "V3", etc.
+columns don't have names, name them "V1", "V2", "V3", like R does.
 
 For example, a DATA.tsv file representing an email spam dataset might look like
 this:
@@ -132,12 +136,3 @@ this:
 "Score", "Email Provider", and "Has Dollar Sign" variables. "Is Spam" and "Has
 Dollar Sign" are binary variables, "Score" is a numeric variable, and "Email
 Provider" is a categorical variable.
-
-## Issues
-
-* Encoding sparse matrices
-* Compressing large datasets... compress all datasets?
-* Dealing with multiple response problems
-* Canonical train/test splits: solve with splits\_X.csv? Kind of a pain.
-* Including text fields
-* Including ordinal or circular fields
