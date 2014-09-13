@@ -1,10 +1,11 @@
 # Dataset Formatting Specification
 
 This document contains the specification for dataset formatting in this project.
-The underlying goal for this specification is simplicity:
+The underlying goal for this specification is simplicity, manifested in three
+ways:
 
-1. This specification to be easy to understand.
-2. It to be easy to format datasets to obey this specification.
+1. This specification should be easy to understand.
+2. It should be easy to format datasets to obey this specification.
 3. Datasets formatted according to this specification should be easy to work with.
 
 
@@ -40,11 +41,12 @@ encoding, (both described in the **TSV Format** section). It is preferred, but
 not required, that binary feature variables use 0/1 formatting.
 
 Sometimes the rows of a dataset have names. For example, each observation (row)
-might refer to a particular chemical, and the rowname might be the name of this
-chemical. Do not include rownames in DATA.tsv, as they should not be used in
-building models and consequently complicate doing so. Similarly, do not include
-a column of train/test split ids. The general rule is that DATA.tsv should
-contain only the response variable and the feature variables, nothing more.
+might refer to a particular baseball player, and the rowname might be the name
+of this player. Do not include rownames in DATA.tsv, as they should not be used
+in building models and consequently complicate doing so. Similarly, do not
+include a column of train/test split ids. The general rule is that DATA.tsv
+should contain only the response variable and the feature variables, nothing
+more.
 
 
 ## METADATA.tsv
@@ -77,7 +79,7 @@ DESCRIPTION.txt is an ASCII text description of the dataset, often copied from
 the original source of the data. The general idea is that you should be able to
 get some extra information about the dataset if you need to by reading this
 file. Unlike DATA.tsv and METADATA.tsv, however, there are no requirements about
-what to put in here, however.
+what to put in here.
 
 
 ## TSV Specification
