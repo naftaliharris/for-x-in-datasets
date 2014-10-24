@@ -15,7 +15,7 @@ Repository](http://archive.ics.uci.edu/ml/), [mldata.org](http://mldata.org/),
 and [kdnuggets.com](http://www.kdnuggets.com/datasets/index.html)--but most
 collections have datasets that are formatted painfully inconsistently.
 
-Datasets file formats vary between csv, tsv, MS Excel, Rdata, fixed-column
+Dataset file formats vary between csv, tsv, MS Excel, Rdata, fixed-column
 width, SVMLight, MS Word (seriously), and etchings in stone tablets. Even if you
 convert all of them to a particular file format, you're still left with
 inconsistencies about how to represent binary values, (0/1, -1/+1, g/b, 1/2,
@@ -40,15 +40,16 @@ and "high dimensional" data, for which there are many more predictor variables
 than response variables.
 
 The reason for these limitations is that each different structure requires its
-own format. To achieve critical mass, we've focused just on the structure we
-believe is most popular, the traditional "high n, low p" tabular dataset.
+own format. To do well on one thing rather than poorly on many, this project
+focuses just on the structure that is arguably most popular, the traditional
+"high n, low p" tabular dataset.
 
 
 ## Working with these datasets
 
 You can find a very short example of how to work with these datasets in Python,
-R, Matlab, or Julia in the corresonding example.\* script. Just clone or
-download this repo, copy the script, and you're good to go!
+R, or Julia in the corresonding example.\* script. Just clone or download this
+repo, copy the script, and you're good to go!
 
 
 ## Contributing
