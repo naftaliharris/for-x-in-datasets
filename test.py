@@ -10,15 +10,11 @@ import subprocess
 import pandas as pd
 
 dataset_pattern = r"^[A-Z0-9][a-zA-Z0-9]+(_[A-Z0-9][a-zA-Z0-9]+)*$"
-required_files = ["METADATA.tsv", "DATA.tsv", "DESCRIPTION.txt"]
+required_files = ["DATA.tsv", "DESCRIPTION.txt"]
 optional_files = []
 
 METADATA_COLS = ["name", "n", "p", "numeric_X", "binary_X", "categorical_X",
                  "y_type", "missing_X"]
-
-
-def read_tsv(path):
-    return pd.read_csv(path, encoding="utf-8", sep="\t")
 
 
 def dataset_dir(dataset):
@@ -35,14 +31,14 @@ def datatype(x):
     return "binary"
 
 
-def validate_dataset(dataset):
+def validate_dataset(name, metadata):
     """Checks a dataset for validity"""
 
     # Check the name
-    if not re.match(dataset_pattern, dataset):
+    if not re.match(dataset_pattern, name):
         raise ValueError("Invalid dataset name")
 
-    directory = dataset_dir(dataset)
+    directory = dataset_dir(name)
 
     # Only certain files are allowed
     allowed_files = required_files + optional_files
@@ -56,21 +52,14 @@ def validate_dataset(dataset):
         if required_file not in file_names:
             raise ValueError("Missing required file \"%s\"" % required_file)
 
-    # METADATA.tsv must have certain required elements
-    metadata = read_tsv(os.path.join(directory, "METADATA.tsv"))
-    if metadata.shape[0] != 1:
-        raise ValueError("METADATA.tsv must have 1 row only")
-    if metadata.columns.tolist() != METADATA_COLS:
-        raise ValueError("Columns of METADATA.tsv must be %s" % METADATA_COLS)
-
     # Read X and y
-    data = read_tsv(os.path.join(directory, "DATA.tsv"))
+    data = pd.read_csv(os.path.join(directory, "DATA.tsv"), sep="\t", encoding="utf-8")
     y = data[data.columns[0]]
     X = data
     del X[X.columns[0]]
 
     # No lying about the dimensions of X
-    metadata_shape = (metadata["n"][0], metadata["p"][0])
+    metadata_shape = (metadata["n"], metadata["p"])
     if X.shape != metadata_shape:
         raise ValueError("Dimensions of X.csv %s don't agree with the "
                          "dimensions in METADATA.tsv %s"
@@ -82,7 +71,7 @@ def validate_dataset(dataset):
         X_types.add(datatype(X[column]))
     metadata_types = set()
     for data_type in ["numeric", "binary", "categorical"]:
-        if metadata["%s_X" % data_type][0]:
+        if metadata["%s_X" % data_type]:
             metadata_types.add(data_type)
     if X_types != metadata_types:
         raise ValueError("METADATA data types %s don't agree with empirical "
@@ -90,10 +79,10 @@ def validate_dataset(dataset):
 
     # No lying about missingness in X
     missing = pd.isnull(X).any().any()
-    if missing != metadata["missing_X"][0]:
+    if missing != metadata["missing_X"]:
         raise ValueError("Empirical missingness of X.csv (%s) doesn't agree "
                          "with the value in METADATA.tsv (%s)"
-                         % (missing, metadata["missing_X"][0]))
+                         % (missing, metadata["missing_X"]))
 
     # Check y for validity
     dt = datatype(y)
@@ -101,18 +90,19 @@ def validate_dataset(dataset):
         raise ValueError("y is categorical but has less than three values")
     if pd.isnull(y).any():
         raise ValueError("No missing values allowed in y")
-    if datatype(y) != metadata["y_type"][0]:
+    if datatype(y) != metadata["y_type"]:
         raise ValueError("METADATA.tsv response type (\"%s\") "
                          "isn't the observed response type (\"%s\") in y"
-                         % (metadata["y_type"][0], datatype(y)))
+                         % (metadata["y_type"], datatype(y)))
 
 
 def test_datasets():
     sys.stdout.write("Testing datasets")
     sys.stdout.flush()
-    for ds in os.listdir("datasets"):
+    datasets = pd.read_csv("METADATA.tsv", index_col="name", sep="\t")
+    for name, metadata in datasets.iterrows():
         try:
-            validate_dataset(ds)
+            validate_dataset(name, metadata)
         except Exception as e:
             print "\nDataset \"%s\":" % ds
             raise
