@@ -11,9 +11,8 @@ ways:
 
 ## The dataset directory
 
-Each dataset consists of three files in a directory: The data itself, called
-**DATA.tsv**, some short metadata about the dataset, called **METADATA.tsv**,
-and a textual description of the dataset, called **DESCRIPTION.txt**.
+Each dataset consists of two files in a directory: The data itself, called
+**DATA.tsv**, and a textual description of the dataset, called **DESCRIPTION.txt**.
 
 The name of the dataset also serves as the directory name. Dataset names should
 consist of capitalized words separated by underscores rather than spaces, using
@@ -49,6 +48,15 @@ should contain only the response variable and the feature variables, nothing
 more.
 
 
+## DESCRIPTION.txt
+
+DESCRIPTION.txt is an ASCII text description of the dataset, often copied from
+the original source of the data. The general idea is that you should be able to
+get some extra information about the dataset if you need to by reading this
+file. Unlike DATA.tsv and METADATA.tsv, however, there are no requirements about
+what to put in here.
+
+
 ## METADATA.tsv
 
 METADATA.tsv is a very short file describing the dataset's data. In fact, it
@@ -71,15 +79,6 @@ single row. The columns of this file are:
     variable, one of "numeric", "binary", or "categorical".
 8.  "missing\_X": A binary variable indicating whether the feature variables
     contain any missing values.
-
-
-## DESCRIPTION.txt
-
-DESCRIPTION.txt is an ASCII text description of the dataset, often copied from
-the original source of the data. The general idea is that you should be able to
-get some extra information about the dataset if you need to by reading this
-file. Unlike DATA.tsv and METADATA.tsv, however, there are no requirements about
-what to put in here.
 
 
 ## TSV Specification
